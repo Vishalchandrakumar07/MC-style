@@ -1,8 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { Box, Typography, Divider } from '@mui/material';
-import Slider from 'react-slick';
 import { products } from '../data/productsData';
-
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -18,18 +20,6 @@ const ProductDetail = () => {
     );
   }
 
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    autoplay: true,
-    autoplaySpeed: 3500,
-    swipe: true,
-  };
-
   return (
     <Box
       sx={{
@@ -44,41 +34,51 @@ const ProductDetail = () => {
         gap: { xs: 4, md: 6 },
       }}
     >
-      {/* Image Section */}
+      {/* Image Section with Swiper */}
       <Box
-  sx={{
-    width: '100%',
-    maxWidth: '500px',
-    mx: 'auto',
-  }}
->
-  <Slider {...sliderSettings}>
-    {product.images.map((imgSrc, index) => (
-      <Box
-        key={index}
         sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
+          width: '100%',
+          maxWidth: 300,
+          mx: 'auto',
           px: 1,
-          py: 2,
         }}
       >
-        <Box
-          component="img"
-          src={imgSrc}
-          alt={`${product.title} ${index + 1}`}
-          sx={{
-            width: '100%',
-            maxHeight: { xs: 250, sm: 400, md: 450 },
-            objectFit: 'contain',
-          }}
-        />
+        <Swiper
+          modules={[Autoplay, Pagination]}
+          slidesPerView={1}
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 3500 }}
+          loop
+          style={{ borderRadius: '16px' }}
+        >
+          {product.images.map((imgSrc, index) => (
+            <SwiperSlide key={index}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: { xs: 250, sm: 350, md: 400 },
+                  backgroundColor: '#f9f9f9',
+                  borderRadius: 2,
+                }}
+              >
+                <Box
+                  component="img"
+                  src={imgSrc}
+                  alt={`${product.title} ${index + 1}`}
+                  sx={{
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                    objectFit: 'contain',
+                    borderRadius: 2,
+                  }}
+                />
+              </Box>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </Box>
-    ))}
-  </Slider>
-</Box>
-
 
       {/* Product Info */}
       <Box

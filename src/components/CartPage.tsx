@@ -8,39 +8,47 @@ import {
   Button,
   Divider,
 } from '@mui/material';
-import { Link } from 'react-router-dom'; // ✅ import Link
+import { Link } from 'react-router-dom';
 
 const CartPage = () => {
   const { cartItems, removeFromCart, clearCart } = useCart();
 
   if (cartItems.length === 0) {
     return (
-      <Box p={4}>
-      <Typography variant="h5" mt={6}>
-        Your cart is empty 😕
-      </Typography>
-    </Box>
-    
+      <Box p={{ xs: 2, sm: 4 }} mt={6} textAlign="center">
+        <Typography variant="h5">Your cart is empty 😕</Typography>
+      </Box>
     );
   }
 
   return (
-    <Box p={4} mt={6}>
+    <Box p={{ xs: 2, sm: 4 }} mt={6}>
       <Typography variant="h4" mb={2}>
         Your Cart 🛒
       </Typography>
 
       {cartItems.map((item) => (
-        <Box key={item.id} sx={{ mb: 2 }}>
+        <Box key={item.id} mb={2}>
           <Link to={`/product/${item.id}`} style={{ textDecoration: 'none' }}>
-            <Card sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+            <Card
+              sx={{
+                display: 'flex',
+                flexDirection: { xs: 'column', sm: 'row' },
+                alignItems: 'center',
+                cursor: 'pointer',
+              }}
+            >
               <CardMedia
                 component="img"
                 image={item.image}
                 alt={item.name}
-                sx={{ width: 100, height: 100, objectFit: 'cover' }}
+                sx={{
+                  width: { xs: '100%', sm: 100 },
+                  height: { xs: 200, sm: 100 },
+                  objectFit: 'cover',
+                }}
               />
-              <CardContent sx={{ flexGrow: 1 }}>
+              <CardContent sx={{ flexGrow: 1, width: '100%' }}>
                 <Typography variant="h6" color="text.primary">
                   {item.name}
                 </Typography>
@@ -63,9 +71,11 @@ const CartPage = () => {
 
       <Divider sx={{ my: 3 }} />
 
-      <Button variant="contained" color="error" onClick={clearCart}>
-        Clear Cart
-      </Button>
+      <Box display="flex" justifyContent="flex-end">
+        <Button variant="contained" color="error" onClick={clearCart}>
+          Clear Cart
+        </Button>
+      </Box>
     </Box>
   );
 };

@@ -10,6 +10,9 @@ import FloatingCart from './components/FloatingCart';
 import { CartProvider } from './components/CartContext'; // 👈 import context
 import CartPage from './components/CartPage';
 import { Box } from '@mui/material';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+// import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 function App() {
   return (

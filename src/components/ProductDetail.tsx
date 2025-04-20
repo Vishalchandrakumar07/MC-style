@@ -3,6 +3,7 @@ import { Box, Typography, Divider } from '@mui/material';
 import Slider from 'react-slick';
 import { products } from '../data/productsData';
 
+
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const product = products.find((p) => p.id === id);
@@ -46,8 +47,9 @@ const ProductDetail = () => {
       {/* Image Section */}
       <Box
   sx={{
-    width: { xs: '100%', md: '50%' },
-    maxWidth: { xs: '100%', sm: '500px' },
+    width: '100%',
+    maxWidth: '500px',
+    mx: 'auto',
   }}
 >
   <Slider {...sliderSettings}>
@@ -56,10 +58,10 @@ const ProductDetail = () => {
         key={index}
         sx={{
           display: 'flex',
-          justifyContent: { xs: 'flex-start', sm: 'center' },
+          justifyContent: 'center',
           alignItems: 'center',
-          px: { xs: 1, sm: 2 },
-          py: { xs: 1, sm: 2 },
+          px: 1,
+          py: 2,
         }}
       >
         <Box
@@ -68,8 +70,7 @@ const ProductDetail = () => {
           alt={`${product.title} ${index + 1}`}
           sx={{
             width: '100%',
-            height: 'auto',
-            maxHeight: { xs: 280, sm: 400, md: 450 },
+            maxHeight: { xs: 250, sm: 400, md: 450 },
             objectFit: 'contain',
           }}
         />
@@ -77,6 +78,7 @@ const ProductDetail = () => {
     ))}
   </Slider>
 </Box>
+
 
       {/* Product Info */}
       <Box

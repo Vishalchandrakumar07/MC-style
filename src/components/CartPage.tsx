@@ -16,8 +16,11 @@ const CartPage = () => {
   if (cartItems.length === 0) {
     return (
       <Box p={4}>
-        <Typography variant="h5">Your cart is empty 😕</Typography>
-      </Box>
+      <Typography variant="h5" mt={6}>
+        Your cart is empty 😕
+      </Typography>
+    </Box>
+    
     );
   }
 

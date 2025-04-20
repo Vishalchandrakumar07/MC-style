@@ -99,7 +99,7 @@ const ProductDetail = () => {
           fontWeight={700}
           sx={{ fontSize: { xs: '1.3rem', sm: '1.5rem' }, mb: 2 }}
         >
-          ₹{product.price}
+          {product.price}
         </Typography>
 
         <Divider sx={{ my: 2 }} />

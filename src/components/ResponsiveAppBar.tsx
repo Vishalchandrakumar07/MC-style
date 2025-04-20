@@ -114,7 +114,7 @@ function ResponsiveAppBar() {
             component="div"
             onClick={() => handleNavClick('Home')}
             sx={{
-              mr: 6,
+              mr: 5,
               display: { xs: 'flex', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,

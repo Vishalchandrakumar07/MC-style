@@ -13,7 +13,7 @@ const WhatsAppFloatingButton = () => {
     >
       <IconButton
         component="a"
-        href="https://wa.me/+91 962914281" // Replace with your number
+        href="https://wa.me/9629174281" // Replace with your number
         target="_blank"
         rel="noopener noreferrer"
         sx={{

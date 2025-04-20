@@ -9,6 +9,7 @@ import WhatsAppFloatingButton from './components/WhatsAppFloatingButton';
 import FloatingCart from './components/FloatingCart';
 import { CartProvider } from './components/CartContext'; // 👈 import context
 import CartPage from './components/CartPage';
+import { Box } from '@mui/material';
 
 function App() {
   return (
@@ -23,7 +24,10 @@ function App() {
           </Routes>
           <WhatsAppFloatingButton />
           <FloatingCart /> {/* ✅ floating cart visible on all pages */}
-          <Footer />
+          <Box id="footer" sx={{ scrollMarginTop: '80px' }}>
+  <Footer />
+</Box>
+
         </CartProvider>
       </ThemeProvider>
     </BrowserRouter>

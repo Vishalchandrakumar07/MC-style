@@ -11,10 +11,9 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-// import LunchDiningIcon from '@mui/icons-material/LunchDining';
 import DiamondIcon from '@mui/icons-material/Diamond';
+
 const pages = ['Home', 'Shirts', 'About'];
-// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -36,18 +35,26 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-  // Function to handle navigation scroll
+  // Smooth scroll to section
   const handleNavClick = (page: string) => {
     let sectionId = '';
-    if (page === 'Home') sectionId = 'home-section';
-    if (page === 'Menu') sectionId = 'menu-section';
-    if (page === 'About') sectionId = 'footer';
+    switch (page) {
+      case 'Home':
+        sectionId = 'home-section';
+        break;
+      case 'Shirts':
+        sectionId = 'cards-section';
+        break;
+      case 'About':
+        sectionId = 'footer';
+        break;
+      default:
+        return;
+    }
 
-    if (sectionId) {
-      const section = document.getElementById(sectionId);
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
-      }
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
     }
 
     handleCloseNavMenu();
@@ -57,16 +64,13 @@ function ResponsiveAppBar() {
     <AppBar position="fixed">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* Clickable Icon to go Home */}
-          <IconButton 
-            sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} 
-            onClick={() => handleNavClick('Home')} // Scroll to Home
+          {/* Clickable Logo Avatar */}
+          <IconButton
+            sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}
+            onClick={() => handleNavClick('Home')}
           >
             <Avatar alt="User" src="logo2.png" />
           </IconButton>
-
-          {/* Clickable Logo to go Home */}
-         
 
           {/* Mobile Menu Icon */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -93,37 +97,22 @@ function ResponsiveAppBar() {
           {/* Desktop Menu */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button key={page} onClick={() => handleNavClick(page)} sx={{ my: 2, color: 'white', display: 'block' }}>
+              <Button
+                key={page}
+                onClick={() => handleNavClick(page)}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
                 {page}
               </Button>
             ))}
           </Box>
 
-          {/* User Avatar */}
-          <Box sx={{ flexGrow: 0 }}>
-           
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-              keepMounted
-              transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {/* {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
-                </MenuItem>
-              ))} */}
-            </Menu>
-          </Box>
+          {/* Logo Text */}
           <Typography
             variant="h6"
             noWrap
             component="div"
-            onClick={() => handleNavClick('Home')} // Scroll to Home
+            onClick={() => handleNavClick('Home')}
             sx={{
               mr: 6,
               display: { xs: 'flex', md: 'flex' },
@@ -137,11 +126,26 @@ function ResponsiveAppBar() {
           >
             MIDDLE CLASS
           </Typography>
+
+          {/* Diamond Icon */}
           <Tooltip title="">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <DiamondIcon />
-              </IconButton>
-            </Tooltip>
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <DiamondIcon />
+            </IconButton>
+          </Tooltip>
+
+          <Menu
+            sx={{ mt: '45px' }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            keepMounted
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+          >
+            {/* Optional: user menu items */}
+          </Menu>
         </Toolbar>
       </Container>
     </AppBar>
@@ -149,4 +153,3 @@ function ResponsiveAppBar() {
 }
 
 export default ResponsiveAppBar;
-

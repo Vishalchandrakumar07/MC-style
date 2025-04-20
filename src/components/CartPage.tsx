@@ -1,5 +1,3 @@
-// components/CartPage.tsx
-// import React from 'react';
 import { useCart } from '../components/CartContext'; // update path if needed
 import {
   Box,
@@ -10,6 +8,7 @@ import {
   Button,
   Divider,
 } from '@mui/material';
+import { Link } from 'react-router-dom'; // ✅ import Link
 
 const CartPage = () => {
   const { cartItems, removeFromCart, clearCart } = useCart();
@@ -29,34 +28,37 @@ const CartPage = () => {
       </Typography>
 
       {cartItems.map((item) => (
-        <Card
-          key={item.id}
-          sx={{ display: 'flex', mb: 2, alignItems: 'center' }}
-        >
-          <CardMedia
-            component="img"
-            image={item.image}
-            alt={item.name}
-            sx={{ width: 100, height: 100, objectFit: 'cover' }}
-          />
-          <CardContent sx={{ flexGrow: 1 }}>
-            <Typography variant="h6">{item.name}</Typography>
-            <Typography variant="body2">Price: {item.price}</Typography>
-            <Typography variant="body2">
-              Quantity: {item.quantity || 1}
-            </Typography>
-          </CardContent>
-          <Button color="error" onClick={() => removeFromCart(item.id)}>
-            Remove
-          </Button>
-        </Card>
+        <Box key={item.id} sx={{ mb: 2 }}>
+          <Link to={`/product/${item.id}`} style={{ textDecoration: 'none' }}>
+            <Card sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+              <CardMedia
+                component="img"
+                image={item.image}
+                alt={item.name}
+                sx={{ width: 100, height: 100, objectFit: 'cover' }}
+              />
+              <CardContent sx={{ flexGrow: 1 }}>
+                <Typography variant="h6" color="text.primary">
+                  {item.name}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Price: ₹{item.price}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Quantity: {item.quantity || 1}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Link>
+          <Box mt={1} display="flex" justifyContent="flex-end">
+            <Button color="error" onClick={() => removeFromCart(item.id)}>
+              Remove
+            </Button>
+          </Box>
+        </Box>
       ))}
 
       <Divider sx={{ my: 3 }} />
-
-      {/* <Typography variant="h6" mb={2}>
-        Total: ₹{total}
-      </Typography> */}
 
       <Button variant="contained" color="error" onClick={clearCart}>
         Clear Cart

@@ -36,69 +36,52 @@ const ProductDetail = () => {
         px: { xs: 2, sm: 4 },
         py: { xs: 4, sm: 6 },
         maxWidth: '1200px',
-        maxHeight: '1800px',
         mx: 'auto',
         display: 'flex',
         flexDirection: { xs: 'column', md: 'row' },
+        alignItems: { xs: 'center', md: 'flex-start' },
         gap: { xs: 4, md: 6 },
       }}
     >
       {/* Image Section */}
       <Box
+  sx={{
+    width: { xs: '100%', md: '50%' },
+    maxWidth: { xs: '100%', sm: '500px' },
+  }}
+>
+  <Slider {...sliderSettings}>
+    {product.images.map((imgSrc, index) => (
+      <Box
+        key={index}
         sx={{
-          flex: 1,
           display: 'flex',
-          justifyContent: 'center',
+          justifyContent: { xs: 'flex-start', sm: 'center' },
           alignItems: 'center',
-          position: 'relative',
+          px: { xs: 1, sm: 2 },
+          py: { xs: 1, sm: 2 },
         }}
       >
-       
-
         <Box
+          component="img"
+          src={imgSrc}
+          alt={`${product.title} ${index + 1}`}
           sx={{
             width: '100%',
-            maxWidth: { xs: '100%', sm: '450px', md: '400px' },
-            borderRadius: 2,
-            overflow: 'hidden',
-            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-            backgroundColor: '#fff',
+            height: 'auto',
+            maxHeight: { xs: 280, sm: 400, md: 450 },
+            objectFit: 'contain',
           }}
-        >
-          <Slider {...sliderSettings}>
-            {product.images.map((imgSrc, index) => (
-              <Box
-                key={index}
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  px: { xs: 0, sm: 2 },
-                  py: { xs: 1, sm: 2 },
-                  width: '100%',
-                }}
-              >
-                <Box
-                  component="img"
-                  src={imgSrc}
-                  alt={`${product.title} ${index + 1}`}
-                  sx={{
-                    width: '100%',
-                    maxHeight: { xs: 280, sm: 400, md: 450 },
-                    objectFit: 'contain',
-                  }}
-                />
-              </Box>
-            ))}
-          </Slider>
-        </Box>
+        />
       </Box>
+    ))}
+  </Slider>
+</Box>
 
       {/* Product Info */}
       <Box
         sx={{
-          flex: 1,
-          maxWidth: { xs: '100%', md: '50%' },
+          width: { xs: '100%', md: '50%' },
         }}
       >
         <Typography
@@ -129,24 +112,23 @@ const ProductDetail = () => {
           {product.description}
         </Typography>
 
-         {/* Stock Status Sticker */}
-         <Box
-  sx={{
-    mt: 3,
-    display: 'inline-block',
-    backgroundColor: product.inStock ? 'success.main' : 'error.main',
-    color: '#fff',
-    px: 2,
-    py: 0.5,
-    fontSize: '0.8rem',
-    fontWeight: 600,
-    borderRadius: '8px',
-    textTransform: 'uppercase',
-  }}
->
-  {product.inStock ? 'In Stock' : 'Out of Stock'}
-</Box>
-
+        {/* Stock Status Sticker */}
+        <Box
+          sx={{
+            mt: 3,
+            display: 'inline-block',
+            backgroundColor: product.inStock ? 'success.main' : 'error.main',
+            color: '#fff',
+            px: 2,
+            py: 0.5,
+            fontSize: '0.8rem',
+            fontWeight: 600,
+            borderRadius: '8px',
+            textTransform: 'uppercase',
+          }}
+        >
+          {product.inStock ? 'In Stock' : 'Out of Stock'}
+        </Box>
       </Box>
     </Box>
   );

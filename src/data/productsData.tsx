@@ -36,7 +36,7 @@ export const products = [
     id: '1',
     title: 'Party Wear Full Sleeve Shirt',
     description: 'Premium imported satin cotton fabric',
-    price: '399',
+    price: '₹399',
     images: [
       '/1.jpeg',
       '/2.jpeg',

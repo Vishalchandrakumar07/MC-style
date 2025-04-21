@@ -40,8 +40,8 @@ const Footer = () => {
           <Typography variant="subtitle1" fontWeight={600} gutterBottom>
             Address
           </Typography>
-          <Typography variant="body2">government School, 625/H </Typography>
-          <Typography variant="body2">srn school, opposite thiruthangal,</Typography>
+          <Typography variant="body2">Government School, 625/H </Typography>
+          <Typography variant="body2">SRN School, opposite Thiruthangal,</Typography>
           <Typography variant="body2">Thiruthangal, Tamil Nadu 626130</Typography>
         </Grid>
         

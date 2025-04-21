@@ -9,6 +9,7 @@ import {
   Stack,
 } from '@mui/material';
 import { Facebook, Instagram, Twitter, WhatsApp } from '@mui/icons-material';
+import { LocationOn } from '@mui/icons-material';
 
 const Footer = () => {
   return (
@@ -46,24 +47,30 @@ const Footer = () => {
         
         {/* Location (Map or Office Info) */}
         <Grid item xs={6} sm={4} md={2}>
-          <Typography variant="subtitle1" fontWeight={600} gutterBottom>
-            Location
-          </Typography>
-          <Link
-            href="https://www.google.com/maps/place/Middleclass+men's+wear/@9.4818959,77.8124611,17z/data=!3m1!4b1!4m6!3m5!1s0x3b06cf64e477f479:0x489188461bae16bb!8m2!3d9.4818959!4d77.8124611!16s%2Fg%2F11s85mtvc6?entry=ttu&g_ep=EgoyMDI1MDQxNC4xIKXMDSoASAFQAw%3D%3D"
-            target="_blank"
-            rel="noopener"
-            underline="hover"
-            color="inherit"
-            display="block"
-          >
-            Find us on Google Maps
-          </Link>
-          <Typography variant="body2" mt={1}>
-            Mon - Fri: 9am – 6pm
-          </Typography>
-          <Typography variant="body2">Sat - Sun: Closed</Typography>
-        </Grid>
+  <Typography variant="subtitle1" fontWeight={600} gutterBottom>
+    Location
+  </Typography>
+  <Link
+    href="https://www.google.com/maps/place/Middleclass+men's+wear/@9.4818959,77.8124611,17z/data=!3m1!4b1!4m6!3m5!1s0x3b06cf64e477f479:0x489188461bae16bb!8m2!3d9.4818959!4d77.8124611!16s%2Fg%2F11s85mtvc6?entry=ttu&g_ep=EgoyMDI1MDQxNC4xIKXMDSoASAFQAw%3D%3D"
+    target="_blank"
+    rel="noopener"
+    underline="hover"
+    color="inherit"
+    display="block"
+    sx={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: 1,
+    }}
+  >
+    <LocationOn fontSize="small" /> {/* 👈 Location Icon */}
+    Find us on Google Maps
+  </Link>
+  <Typography variant="body2" mt={1}>
+    Mon - Fri: 9am – 6pm
+  </Typography>
+  <Typography variant="body2">Sat - Sun: Closed</Typography>
+</Grid>
 
         {/* Social Icons */}
         <Grid item xs={12} md={2}>
@@ -89,7 +96,7 @@ const Footer = () => {
         {/* Subscription Box */}
         <Grid item xs={12} md={3}>
           <Typography variant="subtitle1" fontWeight={600} gutterBottom>
-            Any Thought
+            GET IN TOUCH
           </Typography>
           <Stack spacing={1} mt={1}>
             <TextField

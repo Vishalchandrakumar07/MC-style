@@ -12,11 +12,12 @@ const ProductDetail = () => {
 
   if (!product) {
     return (
-      <Box sx={{ p: 4 }}>
+      <Box sx={{ p: 4, mt: 6 }}> {/* 👈 Added mt to move it down */}
         <Typography variant="h4" color="error">
-          Product not found
-        </Typography>
-      </Box>
+    Product not found
+  </Typography>
+</Box>
+
     );
   }
 

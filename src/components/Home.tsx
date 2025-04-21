@@ -1,17 +1,26 @@
-import { Box, Typography, Grid, useTheme } from "@mui/material";
+import { Box, Typography, Grid, useTheme, Button, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import ActionAreaCard from "./ActionAreaCard";
 
 export const Home = () => {
   const navigate = useNavigate();
-  const theme = useTheme(); // ✅ This was missing
+  const theme = useTheme();
+  const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const products = [
-    { id: "1", title: "Party Wear Full Sleeve Shirt", description: "premium imported satin cotton fabric", image: "/1.jpeg", price: 399 },
-    { id: "2", title: "Party Wear Full Sleeve Shirt", description: "premium imported satin cotton fabric", image: "/2.jpeg", price: 399 },
-    { id: "3", title: "Party Wear Full Sleeve Shirt", description: "premium imported satin cotton fabric", image: "/3.jpeg", price: 399 },
-    { id: "4", title: "Party Wear Full Sleeve Shirt", description: "premium imported satin cotton fabric", image: "/4.jpeg", price: 399 },
+  const allProducts = [
+    { id: "1", title: "Party Wear Full Sleeve Shirt", description: "premium imported satin cotton fabric", image: "/1.jpeg", price: 399, category: "Shirts" },
+    { id: "2", title: "Casual T-Shirt", description: "Comfort fit for everyday wear", image: "/2.jpeg", price: 299, category: "T-Shirts" },
+    { id: "3", title: "Formal Pant", description: "Slim fit office-ready trousers", image: "/3.jpeg", price: 599, category: "Pants" },
+    { id: "4", title: "Stylish Shirt", description: "Bold prints and sharp collar", image: "/4.jpeg", price: 499, category: "Shirts" },
   ];
+
+  const filteredProducts =
+    selectedCategory === "All"
+      ? allProducts
+      : allProducts.filter((p) => p.category === selectedCategory);
+
+  const categories = ["All", "Shirts", "T-Shirts", "Pants"];
 
   const handleCardClick = (id: string) => {
     navigate(`/product/${id}`);
@@ -56,7 +65,7 @@ export const Home = () => {
               textTransform: "uppercase",
               letterSpacing: 2,
               fontSize: { xs: "1.2rem", sm: "1.7rem" },
-              color: theme.palette.secondary.main, // Gold accent
+              color: theme.palette.secondary.main,
             }}
             gutterBottom
           >
@@ -67,7 +76,7 @@ export const Home = () => {
               fontWeight: 700,
               letterSpacing: 1,
               fontSize: { xs: "2rem", sm: "2rem", md: "4rem" },
-              color: theme.palette.text.primary, // Consistent dark text
+              color: theme.palette.text.primary,
             }}
             component="h1"
           >
@@ -76,10 +85,34 @@ export const Home = () => {
         </Box>
       </Box>
 
+      {/* Category Buttons */}
+      <Stack
+        direction="row"
+        spacing={2}
+        justifyContent="center"
+        sx={{ marginTop: 4, flexWrap: 'wrap' }}
+      >
+        {categories.map((cat) => (
+          <Button
+            key={cat}
+            variant={selectedCategory === cat ? "contained" : "outlined"}
+            onClick={() => setSelectedCategory(cat)}
+            sx={{
+              textTransform: "none",
+              fontWeight: 600,
+              fontSize: "1rem",
+              borderRadius: "8px",
+            }}
+          >
+            {cat}
+          </Button>
+        ))}
+      </Stack>
+
       {/* Cards Section */}
       <Box id="cards-section" sx={{ marginTop: 4 }}>
         <Grid container spacing={2} sx={{ justifyContent: "center", paddingX: 2 }}>
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <Grid item xs={6} sm={4} md={3} lg={2} key={product.id}>
               <ActionAreaCard
                 {...product}
